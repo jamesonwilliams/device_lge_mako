@@ -13,7 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+KERNEL_DEFCONFIG := mako_defconfig
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-TARGET_PREBUILT_KERNEL := device/lge/mako-kernel/kernel
-endif
+-include kernel/AndroidKernel.mk
+.PHONY: $(PRODUCT_OUT)/kernel
+
+$(PRODUCT_OUT)/kernel: $(TARGET_PREBUILT_INT_KERNEL)
+	cp $(TARGET_PREBUILT_INT_KERNEL) $(PRODUCT_OUT)/kernel
+
